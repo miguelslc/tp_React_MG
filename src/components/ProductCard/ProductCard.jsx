@@ -69,7 +69,7 @@ export default function ProductCard() {
                                 ))}
                             </>
                         ) : (
-                            <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No products found</Typography>
+                            <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No hay productos para mostrar</Typography>
                         )}
                     </Grid>
                 </Grid>

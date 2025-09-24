@@ -63,6 +63,7 @@ export default function UserCard() {
                                             <Typography gutterBottom variant="h5" component="div">
                                                 {user.name.firstname} {user.name.lastname}
                                             </Typography>
+                                            <Typography variant="body2" sx={{ color: 'text.secondary' }}> Ver más...</Typography>
                                             {showMore && userDetails && userDetails.id === user.id && (
                                                 <div>
                                                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -85,10 +86,10 @@ export default function UserCard() {
                             ))}
                         </>
                     ) : (
-                        <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No products found</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No hay usuarios para mostrar</Typography>
                     )}
                 </Grid>
-            </Grid >
+            </Grid>
         </>
     );
 }

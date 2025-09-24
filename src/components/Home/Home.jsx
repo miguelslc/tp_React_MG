@@ -52,7 +52,7 @@ export default function Home() {
                                 ))}
                             </>
                         ) : (
-                            <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No products found</Typography>
+                            <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No hay tareas para mostrar</Typography>
                         )}
                     </Grid>
                 </Grid>
