@@ -1,7 +1,6 @@
-import { Card, CardActionArea, CardMedia, CardContent, Typography, Grid } from "@mui/material";
+import { Card, CardActionArea, CardContent, Typography, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
 
 export default function Home() {
     const [todos, setTodos] = useState([]);
