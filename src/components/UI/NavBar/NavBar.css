@@ -1,19 +1,16 @@
 .navbar {
     background-color: #333;
     color: white;
-
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 1rem 1rem;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin: 0 200px;
+    margin: 1rem;
+    font-weight: bold;
 }
 
 .nav-links a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }

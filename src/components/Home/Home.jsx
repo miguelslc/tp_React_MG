@@ -1,61 +1,60 @@
 import { Card, CardActionArea, CardContent, Typography, Grid } from "@mui/material";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+export default function Home(props) {
+    const imgCT = "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/characters/customplayer_ctm_sas_variantf_png.png";
+    const imgTT = "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/characters/customplayer_tm_balkan_varianth_png.png";
+    
+    const navigate = useNavigate();
+    const { setAgent } = props;
 
-export default function Home() {
-    const [todos, setTodos] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const fetchData = async () => {
-        try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
-            console.log(response.data);
-            setTodos(response.data || []);
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            console.error("Error fetching products data:", error);
-        }
-    };
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const handleOnclick = (agent) => {
+        setAgent(agent);
+        navigate('/agents');
+    }
 
     return (
         <>
-            {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '10vh' }}>
-                    <Grid item xs={12}>
-                        {todos.length > 0 ? (
-                            <>
-                                <Typography variant="h4" sx={{ textAlign: 'center', margin: 2, color: 'primary.main' }}>TODO List</Typography>
-                                {todos.slice(0, 10).map(todo => (
-                                    <Card key={todo.id} sx={{ maxWidth: 345, margin: 2 }}>
-                                        <CardActionArea>
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="div" sx={{ textTransform: 'capitalize' }}>
-                                                    {todo.title}
-                                                </Typography>
-                                                <Typography
-                                                    variant="body2"
-                                                    sx={{
-                                                        color: todo.completed ? 'primary.main' : 'red',
-                                                    }}
-                                                >
-                                                    {todo.completed ? "Realizado" : "No Realizado"}
-                                                </Typography>
-                                            </CardContent>
-                                        </CardActionArea>
-                                    </Card>
-                                ))}
-                            </>
-                        ) : (
-                            <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No hay tareas para mostrar</Typography>
-                        )}
-                    </Grid>
+            <Grid container justifyContent="center" sx={{ minHeight: '10vh' }}>
+                <Grid size={12}>
+                    <Typography variant="h4" sx={{ textAlign: 'center', margin: 2, color: 'primary.main' }}>Bingo Bango Bongo, Bish Bash Bosh</Typography>
                 </Grid>
-            )}
+            </Grid>
+            <Grid container justifyContent="center" sx={{ minHeight: '10vh' }}>
+                <Grid size={3}>
+                    <Card sx={{ maxWidth: 500, margin: 2 }}>
+                        <CardActionArea>
+                            <CardContent sx={{ textAlign: 'center', minHeight: 100, minWidth: 450 }}>
+                                <Typography gutterBottom variant="h5" component="div" sx={{ textTransform: 'capitalize' }}>
+                                    Anti-Terrotistas
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                >
+                                    <img src={imgCT} alt="Anti-Terroristas" style={{ maxHeight: 400, objectFit: 'contain' }}  onClick={()=> handleOnclick("counter-terrorists")}/>
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid size={3} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <>
+                        <Card sx={{ maxWidth: 500, margin: 2 }}>
+                            <CardActionArea>
+                                <CardContent sx={{ textAlign: 'center', minHeight: 100, minWidth: 450 }}>
+                                    <Typography gutterBottom variant="h5" component="div" sx={{ textTransform: 'capitalize' }}>
+                                        Terroristas
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                    >
+                                        <img src={imgTT} alt="Terroristas" style={{ maxHeight: 400, objectFit: 'contain' }}  onClick={()=>handleOnclick("terrorists")}/>
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </>
+                </Grid>
+            </Grid>
         </>
     );
 }
