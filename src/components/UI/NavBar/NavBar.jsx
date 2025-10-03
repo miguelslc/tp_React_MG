@@ -13,6 +13,7 @@ export default function Navbar() {
             <Grid size={5} className="nav-links" sx={{ display: 'flex', justifyContent: 'left' }}>
                     <Link sx={{ textDecoration: 'none', color: 'inherit', padding: '5px' }} to="/"><Typography>Home</Typography></Link>
                     <Link sx={{ textDecoration: 'none', color: 'inherit', padding: '5px' }} to="/weapons"><Typography>Weapons</Typography></Link>
+                    <Link sx={{ textDecoration: 'none', color: 'inherit', padding: '5px' }} to="/charts"><Typography>Charts</Typography></Link>
             </Grid>
             <Grid size={2} sx={{ textAlign: 'right' }}>
                 <Link to="/">

@@ -8,6 +8,7 @@ import Agents from './components/Agents/Agents'
 import Weapons from './components/Weapons/Weapons'
 import WeaponSkins from './components/Weapons/WeaponSkins'
 import { useState } from 'react';
+import ChartsContainer from './components/Chart/ChartsContainer'
 export default function App() {
   const [agent, setAgent] = useState(null);
   const [weapon, setWeapon] = useState(null);
@@ -19,6 +20,7 @@ export default function App() {
         <Route path='/agents' element={<Agents agent={agent} />} />
         <Route path='/weapons' element={<Weapons setWeapon={setWeapon}/>} />
         <Route path='/weapons/skins' element={<WeaponSkins weapon={weapon}/>} />
+        <Route path='/charts' element={<ChartsContainer />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>

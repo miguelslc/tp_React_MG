@@ -2,24 +2,22 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { CircularProgress, Box, Typography } from '@mui/material';
 import useServicesFetch from "../services";
 
-export default function SkinsCharts() {
+export default function AgentsCharts() {
 
-    const url = 'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/es-ES/skins.json';
+    const url = 'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/es-ES/agents.json';
     const { data: serviceData = [], serviceLoading, serviceError } = useServicesFetch(url);
 
     function contarSkinsAgrupadas(serviceData) {
         return serviceData.reduce((conteo, skin) => {
-            const weaponParts = skin.name.split(' | ');
-            const weaponName = weaponParts[0] ? weaponParts[0].trim() : null;
-            if (weaponName) {
-                conteo[weaponName] = (conteo[weaponName] || 0) + 1;
+            const agentsParts = skin.team?.name;
+            if (agentsParts && agentsParts.trim() !== '') {
+                conteo[agentsParts] = (conteo[agentsParts] || 0) + 1;
             }
-
             return conteo;
         }, {});
     }
 
-    const conteoPorArma = contarSkinsAgrupadas(serviceData);
+    const conteoPorAgent = contarSkinsAgrupadas(serviceData);
 
     if (serviceError) {
         return (
@@ -43,11 +41,10 @@ export default function SkinsCharts() {
             <BarChart
                 width={800}
                 height={600}
-                series={[{ data: Object.values(conteoPorArma), label: "Cantidad", type: 'bar' }]}
-                xAxis={[{ scaleType: 'band', data: Object.keys(conteoPorArma) }]}
+                series={[{ data: Object.values(conteoPorAgent), label: "Cantidad", type: 'bar' }]}
+                xAxis={[{ scaleType: 'band', data: Object.keys(conteoPorAgent) }]}
             />
-            <Typography variant="h6" sx={{ textAlign: 'center' }}>Cantidad de Skins por Armamento</Typography>
+            <Typography variant="h6" sx={{ textAlign: 'center' }}>Cantidad de skins por Bando</Typography>
         </>
-
     );
 }
