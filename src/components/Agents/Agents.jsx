@@ -10,26 +10,23 @@ export default function Agents(props) {
 
     const url = 'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/es-ES/agents.json';
 
-    const { data: serviceData, loading: serviceLoading, error: serviceError } = useServicesFetch(url);
-    const [data, setData] = useState([]);
-    const agents = data.filter(agent => agent.team.id === props.agent);
-
-    useEffect(() => {
-        setData(serviceData);
-    }, [serviceData]);
+    const { data: serviceData = [], loading: serviceLoading, error: serviceError } = useServicesFetch(url);
+    const agents = serviceData.filter(agent => agent.team.id === props.agent);
 
     if (serviceError) {
         return <div>Error: {serviceError}</div>;
     }
 
     if (serviceLoading) {
-        <Box sx={{ width: '100%' }}>
-            <LinearProgress />
-        </Box>
+        return (
+            <Box sx={{ width: '100%' }}>
+                <LinearProgress />
+            </Box>
+        )
     }
 
-    if (data.length === 0) {
-        return <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No hay productos para mostrar</Typography>
+    if (agents.length === 0) {
+        return <Typography variant="h6" sx={{ textAlign: 'center', color: 'text.secondary' }}>No hay agentes para mostrar</Typography>
     }
 
     return (

@@ -5,19 +5,18 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import useServicesFetch from "../services";
-import { Outlet, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 export default function Weapons(props) {
 
     const navigate = useNavigate();
     const url = 'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/es-ES/base_weapons.json';
-    const { data: serviceData, loading: serviceLoading, error: serviceError } = useServicesFetch(url);
+    const { data: serviceData = [], loading: serviceLoading, error: serviceError } = useServicesFetch(url);
 
     const { setWeapon } = props;
 
     const onHandleClick = (weapon) => {
         setWeapon(weapon);
-        console.log(weapon);
         navigate(`/weapons/skins`);
     }
 
@@ -26,9 +25,11 @@ export default function Weapons(props) {
     }
 
     if (serviceLoading) {
-        <Box sx={{ width: '100%' }}>
-            <LinearProgress />
-        </Box>
+        return (
+            <Box sx={{ width: '100%' }}>
+                <LinearProgress />
+            </Box>
+        )
     }
 
     if (serviceData.length === 0) {
@@ -75,34 +76,3 @@ export default function Weapons(props) {
         </>
     );
 }
-
-// weapons item : id: "base_weapon-weapon_mag7" -> Object { id: "base_weapon-weapon_scar20", name: "SCAR-20", description: "El SCAR-20 es un rifle de francotirador semiautomático que ofrece una alta cadencia de disparo y un potente daño a larga distancia a cambio de una velocidad de movimiento lenta y un precio elevado.", … }​​​
-// description: "El SCAR-20 es un rifle de francotirador semiautomático que ofrece una alta cadencia de disparo y un potente daño a larga distancia a cambio de una velocidad de movimiento lenta y un precio elevado."
-// ​​​
-// id: "base_weapon-weapon_scar20"
-// ​​​
-// image: "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/weapons/base_weapons/weapon_scar20_png.png"
-// ​​​
-// name: "SCAR-20"
-
-
-// weapon skins -> weapon: Object { id: "weapon_m249", weapon_id: 14, name: "M249" }
-// ​​​​id: "weapon_m249"
-// ​​​​name: "M249"
-// ​​​​weapon_id: 14
-
-<Accordion>
-    <AccordionSummary
-        expandIcon={<ArrowDropDownIcon />}
-        aria-controls="panel2-content"
-        id="panel2-header"
-    >
-        <Typography component="span">Accordion 2</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-        <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
-    </AccordionDetails>
-</Accordion>

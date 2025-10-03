@@ -2,7 +2,7 @@
     "jsc": {
         "parser": {
             "syntax": "ecmascript",
-            "tsx": true
+            "jsx": true
         },
         "target": "es2021",
         "transform": {
