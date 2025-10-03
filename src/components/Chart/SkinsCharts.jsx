@@ -46,7 +46,7 @@ export default function SkinsCharts() {
                 series={[{ data: Object.values(conteoPorArma), label: "Cantidad", type: 'bar' }]}
                 xAxis={[{ scaleType: 'band', data: Object.keys(conteoPorArma) }]}
             />
-            <Typography variant="h6" sx={{ textAlign: 'center' }}>Cantidad de Skins por Armamento</Typography>
+            <Typography variant="h6" sx={{ textAlign: 'center', color: "#3b3b3b", padding: "15px" }}>Cantidad de Skins por Armamento</Typography>
         </>
 
     );

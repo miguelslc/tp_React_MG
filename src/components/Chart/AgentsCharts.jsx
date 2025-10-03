@@ -44,7 +44,7 @@ export default function AgentsCharts() {
                 series={[{ data: Object.values(conteoPorAgent), label: "Cantidad", type: 'bar' }]}
                 xAxis={[{ scaleType: 'band', data: Object.keys(conteoPorAgent) }]}
             />
-            <Typography variant="h6" sx={{ textAlign: 'center' }}>Cantidad de skins por Bando</Typography>
+            <Typography variant="h6" sx={{ textAlign: 'center' , color: "#3b3b3b", padding: "15px"}}>Cantidad de skins por Bando</Typography>
         </>
     );
 }
