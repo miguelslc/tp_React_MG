@@ -48,7 +48,7 @@ describe('Weapons Component', () => {
     // ----------------------------------------------------------------
     // Test Case 1: Loading State
     // ----------------------------------------------------------------
-    test('renders LinearProgress when data is loading', () => {
+    test('renders CircularProgress when data is loading', () => {
         useServicesFetch.mockReturnValue({
             data: [],
             loading: true,
@@ -56,8 +56,6 @@ describe('Weapons Component', () => {
         });
 
         render(<Weapons setWeapon={mockSetWeapon} />);
-
-        // Check for the accessible role of Material UI's LinearProgress
         expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
 

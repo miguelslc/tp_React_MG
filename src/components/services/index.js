@@ -9,11 +9,14 @@ export default function useServicesFetch(url) {
     useEffect(() => {
         api(url)
             .then((response) => {
+                setLoading(true);
+                setTimeout(()=>{console.log('timeout para mostrar el loader')},5000);
                 console.log("data from api Call ", response);
                 setData(response.data ? response.data : response);
             })
             .catch((error) => console.error("Error fetching data:", error), setError(error))
-            .finally(() => setLoading(false));
+            .finally(() => 
+                setLoading(false));
     }, [url]);
     return { data, loading };
 }

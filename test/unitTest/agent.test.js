@@ -44,7 +44,7 @@ describe('Agents Component', () => {
     // ----------------------------------------------------------------
     // Test Case 1: Loading State
     // ----------------------------------------------------------------
-    test('renders LinearProgress when data is loading', () => {
+    test('renders CircularProgress when data is loading', () => {
         // Mock the hook to return a loading state
         useServicesFetch.mockReturnValue({
             data: [],
@@ -52,11 +52,7 @@ describe('Agents Component', () => {
             error: ""
         });
 
-        // The component will render the LinearProgress (which is a Material UI component)
-        // We'll look for its role or the underlying element it produces.
-        // A common practice is to check for the 'progressbar' role.
         render(<Agents agent="terrorists" />);
-
         expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
 

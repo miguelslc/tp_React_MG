@@ -1,5 +1,5 @@
 
-import { Typography, Box, LinearProgress, Card, CardMedia, Grid, Tooltip } from '@mui/material';
+import { Typography, Box, CircularProgress, Card, CardMedia, Grid, Tooltip, Alert } from '@mui/material';
 import useServicesFetch from "../../services";
 
 export default function WeaponSkins(props) {
@@ -14,13 +14,19 @@ export default function WeaponSkins(props) {
     });
 
     if (serviceError) {
-        return <div>Error: {serviceError}</div>;
+        return (
+            <Alert variant="filled" severity="error">
+                Error: {serviceError}
+            </Alert>)
+
     }
 
     if (serviceLoading) {
         return (
             <Box sx={{ width: '100%' }}>
-                <LinearProgress />
+                <CircularProgress sx={{
+                    "--CircularProgress-size": "80px"
+                }} />
             </Box>
         );
     }

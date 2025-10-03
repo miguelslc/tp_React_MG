@@ -33,7 +33,7 @@ describe('WeaponSkins Component', () => {
     // ----------------------------------------------------------------
     // Test Case 1: Loading State
     // ----------------------------------------------------------------
-    test('renders LinearProgress when data is loading', () => {
+    test('renders CircularProgress when data is loading', () => {
         useServicesFetch.mockReturnValue({
             data: [],
             serviceLoading: true,
@@ -94,21 +94,10 @@ describe('WeaponSkins Component', () => {
         // Assume mockWeaponProp is 'AK-47'
         render(<WeaponSkins weapon={mockWeaponProp} />);
 
-        // Wait for the data to be filtered and rendered
-        await waitFor(() => {
-            // 1. Check for the visible header, confirming the component rendered.
+        await waitFor(() => {            
             expect(screen.getByText(`Skins para ${mockWeaponProp}`)).toBeInTheDocument();
-
-            // 2. Query for all rendered <img> elements (CardMedia) that have the alt text "skin CS:GO".
-            // This confirms that the cards were built and rendered.
             const renderedSkins = screen.getAllByRole('img');
-
-            // 3. Assert that exactly the correct number of skins passed the filter (2)
-            // This confirms the filter worked correctly by excluding the invalid skins.
             expect(renderedSkins).toHaveLength(2);
-
-            // NOTE: The previous checks for the specific skin names (e.g., 'AK-47 | Redline') 
-            // are unnecessary and cause the error because the text is hidden in the Tooltip title.
         });
     });
 
@@ -127,16 +116,10 @@ describe('WeaponSkins Component', () => {
 
         // Wait for the data to be filtered and rendered
         await waitFor(() => {
-
-            // 1. Check the main title (This is visible text and should pass)
             expect(screen.getByText('Skins para ak-47')).toBeInTheDocument();
-
-            // 2. Check for the two VALID skins using their full names as the accessible name (alt text)
-            // This confirms the filter worked and the cards rendered.
             expect(screen.getByRole('img', { name: 'AK-47 | Redline' })).toBeInTheDocument();
             expect(screen.getByRole('img', { name: 'AK-47 | Case Hardened' })).toBeInTheDocument();
 
-            // 3. Assert the total count of rendered images is 2, confirming no invalid skins slipped through.
             const renderedSkins = screen.getAllByRole('img');
             expect(renderedSkins).toHaveLength(2);
         });

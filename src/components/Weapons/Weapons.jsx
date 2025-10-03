@@ -1,11 +1,11 @@
-import { Card, CardMedia, Grid, LinearProgress, Box, Button } from "@mui/material";
+import { Card, CardMedia, Grid, CircularProgress, Box, Button, ImageList, ImageListItem, Alert } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import useServicesFetch from "../services";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Weapons(props) {
 
@@ -21,13 +21,18 @@ export default function Weapons(props) {
     }
 
     if (serviceError) {
-        return <div>Error: {serviceError}</div>;
+        return (
+            <Alert variant="filled" severity="error">
+                Error: {serviceError}
+            </Alert>)
     }
 
     if (serviceLoading) {
         return (
             <Box sx={{ width: '100%' }}>
-                <LinearProgress />
+                <CircularProgress sx={{
+                    "--CircularProgress-size": "80px"
+                }} />
             </Box>
         )
     }
@@ -39,37 +44,41 @@ export default function Weapons(props) {
     return (
         <>
             <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '10vh' }}>
-                <Grid size={6} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Grid size={12} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     <>
-                        {serviceData.slice(2).map((weapon) => (
-                            <Card key={weapon.id} sx={{ maxWidth: 445, margin: 2 }}>
-                                <CardMedia
-                                    component="img"
-                                    height="350"
-                                    image={weapon.image}
-                                    alt="weapon CS:GO"
-                                    sx={{ objectFit: 'contain', padding: 2, backgroundColor: '#f5f5f5' }}
-                                />
-                                <Accordion>
-                                    <AccordionSummary
-                                        sx={{ minHeight: '95px' }}
-                                        expandIcon={<ArrowDropDownIcon />}
-                                        aria-controls={"base_weapon-weapon"}
-                                        id={weapon.id}
-                                    >
-                                        <Typography gutterBottom variant="h5" component="div" sx={{ textTransform: 'capitalize' }}>
-                                            {weapon.name || weapon.title}
-                                        </Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <Typography>
-                                            {weapon.description}
-                                        </Typography>
-                                        <Button variant="contained" onClick={() => onHandleClick(weapon.name)} sx={{ marginTop: 2 }} > Ver Skins </Button>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </Card>
-                        ))}
+                        <ImageList cols={4} >
+                            {serviceData.slice(2).map((weapon) => (
+                                <ImageListItem key={weapon.id}>
+                                    <Card key={weapon.id} sx={{ maxWidth: 500, margin: 2 }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="350"
+                                            image={weapon.image}
+                                            alt="weapon CS:GO"
+                                            sx={{ objectFit: 'contain', padding: 2, backgroundColor: '#f5f5f5' }}
+                                        />
+                                        <Accordion>
+                                            <AccordionSummary
+                                                sx={{ minHeight: '95px' }}
+                                                expandIcon={<ArrowDropDownIcon />}
+                                                aria-controls={"base_weapon-weapon"}
+                                                id={weapon.id}
+                                            >
+                                                <Typography gutterBottom variant="h5" component="div" sx={{ textTransform: 'capitalize' }}>
+                                                    {weapon.name || weapon.title}
+                                                </Typography>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                                <Typography>
+                                                    {weapon.description}
+                                                </Typography>
+                                                <Button variant="contained" onClick={() => onHandleClick(weapon.name)} sx={{ marginTop: 2 }} > Ver Skins </Button>
+                                            </AccordionDetails>
+                                        </Accordion>
+                                    </Card>
+                                </ImageListItem>
+                            ))}
+                        </ImageList>
                     </>
                 </Grid>
             </Grid>
